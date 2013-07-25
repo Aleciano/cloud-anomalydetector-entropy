@@ -1,0 +1,77 @@
+# Gnuplot script file for plotting data
+# resert: Limpa da memória do gnuplot toda a informação que
+# esteja carregada.
+reset
+# As linhas abaixo definem as características padrões dos gráficos
+# As informações mais importantes são:
+#  - o formato de saída do arquivo com o gráfico
+#  - o nome e tamanho padrão da fonte que será utilizada
+#  - se o gráfico será colorido (com a especificação "color") ou em
+#    preto-e-branco.
+# A opção "enhanced" permite usar recursos muito úteis na hora de
+# construir figuras.
+# set terminal postscript eps enhanced color "Times-Roman" 18
+set terminal postscript eps enhanced "Times-Roman" 22
+
+# A opção abaixo define que a escala será especificada automaticamente.
+set   autoscale
+
+# Define o tamanho da margem esquerda (lmargin) e inferior (bmargin).
+# Isso é útil porque as vezes desejamos colocar informações nos eixos
+# que não cabem no espaço padrão.
+set lmargin 8
+set bmargin 4
+
+# Define o nome da figura resultante
+set output "log.eps"
+# Especifica a posição X,Y da legenda.
+# X e Y são as coordenadas relativas aos valores dos eixos.
+set key box
+# Nome da legenda que aparece no eixo esquerdo
+# O {/Italic F} diz que a variável F estará em itálico.
+# A parte {/*1.5{conteúdo}} diz o conteúdo terá o tamanho do texto 1.5
+# vezes maior que o tamanho padrão.
+# O termo 1,0 introduz um o deslocamento de tantas unidades de tamanho
+# padrão de fonte na direção X,Y. Aceita-se números fracionados.
+set ylabel "{/*1.5{/Italic Entropia}";
+# Especifica a escala principal em Y.
+set yrange [0:3]
+# Define o tamanho da divisão principal do eixo Y
+set ytics 0.5
+# Define o número de intervalos das divisões secundárias em Y.
+set mytics 0.25
+# xlabel é o mesmo que ylabel, mas aplicando para o eixo X
+# O termo Re_{D} coloca o "D" como subescrito de Re
+set xlabel "{/*1.5{/Italic tempo(s)} }"
+# O mesmo que yrange, mas para o eixo x
+set xrange [0000:180]
+# O mesmo que ytics, mas para o eixo x
+set xtics 30
+# O mesmo que mytics, mas para o eixo x
+set mxtics 10
+# Abaixo segue o comando que realmente plota os dados.
+# O arquivo exemplo.dat consiste de dados colocados em colunas
+# Nesse arquivo, são válidas as regras de comentários colocadas aqui.
+# A "Curva 1" usa a coluna 1 ($1) para o eixo X e 2 ($2) para o eixo Y.
+# Coloca o título "Curva 1"
+# para não usar legenda, use "notitle" no lugar de "title"
+# Usa apenas pontos (with points).
+# Os pontos são do tipo 7 (pt 7)
+# O tamanho é 1.5 vezes o tamanho padrão (ps 1.5)
+# A "Curva 2" coloca pontos com margem de erro.
+# A "Curva 1" usa a coluna 1, ($1) para o eixo X, coluna 4 ($4) para o eixo Y e
+# a coluna 5 ($5) para ser o erro da variável em Y. Observe que estou ignorando a
+# coluna 3.
+# Define-se que é do tipo que têm erro em y usando o "yerrorbars"
+# para erro em x, tem-se o "xerrorbars" e para ambos, "xyerrobars".
+# O gráfico com barra de erros é como um gráfico de pontos, mas com as barras de
+# erros. Assim, define-se o tipo do ponto (pt 4) o tipo da linha que compõem as
+# barras (lt 2) e a largura dessas linhas (lw 3).
+# Assim como o tamanho do ponto (ps 1.5)
+# A "Curva 3" é um gráfico de linhas, usando a linha do tipo 1 (lt 1) e largura
+# padrão (lw 1).
+# Após o caracter \ não pode haver espaços.
+plot "log.txt" title "Entropia"  with linespoints pt 7 ps 1.5 lt 3 lw 2 lc rgb "#332268"
+
+#     "exemplo.dat" using ($1):($4):($5) title "Curva 2" with yerrorbars pt 4 lt 2 lw 3 ps 1.5, \
+#   "exemplo.dat" using ($1):($6):($7) title "Curva 3" with lines lt 1 lw 1

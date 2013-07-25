@@ -1,0 +1,232 @@
+Novidades sobre a implementação do Cálculo da entropia.
+
+						** Iniciado em 10/07/2012 **
+============================================
+* 06/09/2012 * manhã
+
+-A forma diferente de obter v está totalmente funcional.
+-Não é necessário alterar a forma de obter os nomes dos logs. Só no programa dos experimentos.
+
+Novo:
+-Alguns erros em ponteiros estavam causando erro de segmentação, as lógicas foram corrigidas.
+-V em "entropiaMonitorSample" é o tamanho da fila menos "vQtd", ou seja, a quantidade de itens repetidos.
+
+Próximo:
+-Nada.
+
+* 05/09/2012 * noite o.0
+-Alterado a forma de como obter v em "entropiaMonitorSample"
+-Criada uma função para obter este v
+
+Novo:
+- o certo é que v seja o tamanho da fila subtraído dos valores repetidos. 
+Ou seja, v é a quantidade de valores diferentes na fila.
+
+Próximo:
+- testar se a função para obter v está correta.
+- aproveitar e mexer na forma de gerar os logs. Pedindo nome do arquivo.
+
+* 25/07/2012 * manhã
+
+-Removidos comentários e linhas de teste
+-Editadas algumas linhas dos TADs também, coisas simples.
+
+Novo:
+-Função desaloca dos TADs não imprime mais texto, só asterisco para cada unidade
+que foi liberada da memória.
+-Removido prints que mostravam fila de bins, tempos de leituras das memórias e 
+outros textos.
+
+Próximo:
+-adicioanar mais um argumento para indicar o nome do arquivo de texto a ser salvo.
+
+* 23/07/2012* TARDE
+
+-Função eiQTD está correta e retornando a quantidade correta de M-eventos (número ei)
+existentes na fila.
+-A impressão no arquivo agora está adicionando informações sobre o teste, variáveis, tempo.
+
+Novo:
+-fprintf imprimindo muitas coisas no arquivo de log.
+
+Próximo:
+-Testes na luz!!
+
+* 23/07/2012*
+
+-Feitos alguns ajustes nas funções dos TADs.
+-A média está sendo feita corretamente e a inserção no short int também.
+
+Novo:
+-A função ultimoelemento agora retorna o elemento, e não resultados booleanos ( 0 e 1).
+-A função média também retorna o resultado direto e não booleanos.
+-Alterações na sequencia de criação de variáveis.
+-
+
+Próximo:
+-Terminar de ajeitar eiQtd e ver se a entropia está sendo calculada corretamente
+e inserida corretamente no arquivo.
+-Fazer testes no notebook.
+
+* 20/07/2012*
+
+-Já está inserido uma forma de ler os argumentos do tamanho da janela,
+do tempo de execução e outras variáveis interessantes. É necessário informar
+todas ou o programa não executa.
+-A estrutura double já está implementada e a sua inserção funciona corretamente.
+Faltam testar se a média está sendo calculada corretamente.
+-A estrutura short int já está semi-pronta, já que segue o mesmo caminho
+da double.
+
+Novo:
+-Inserção funcionando 100%
+-Impressão da lista funcionando.
+-Desalocação do que estava sendo feito dinamicamente.
+-Retorno do último e do primeiro elemento da fila estão ok.
+-Algumas variáveis auxiliares e métodos também foram adicionados
+ao programa principal.
+
+Próximo:
+-Testar média do double.
+-Fazer os métodos de cálculo de entropia e eiQtd consequentemente. Vale
+lembrar quea agora "ei" se inicia como 0, já que o algoritmo vai sempre
+encontrar a coluna "fim" quando buscar, retornado 1 assim como antes.
+-A busca será feita do começo até o fim da fila, que se não completa,
+ou seja, se não estiver com a janela inteira, vai buscar até o valor 
+do tamanho atual. E se ela estiver cheia, vai buscá-la por inteiro, achar
+a coluna "fim" como dito anteriormente, e achar outra coluna semelhante se
+a mesma existir.
+-Compilar fila short int e testar inserções. 
+-Alterar impressão da double e fazer com short int.
+
+* 18/07/2012 *
+
+-Será necessário passar o argumento tamanho da janela. Na forma 
+atual do código, isto não é possível, passarei a estrutura 
+de dados para alocação dinâmica.
+-Seria bom também passar o tempo do teste.
+
+Novo:
+-alterados os nomes da estruturas para tipos mais convencionais.
+-alterada parte das estruturas em si e seus métodos.
+
+Próximo:
+-continuar alterando as estruturas e deixar 100%.
+-fazer alterações nas chamadas das estruturas no código principal, no caso
+localmetrics.cpp.
+-colocar o recebimento de argumentos
+-testar!!!!
+
+* 18/07/2012 * MANHÃ
+
+-Criado script (runtest.sh) para inserir uma certa quantidade de anomalias
+no processamento do computador.
+-O script insere 4 anomalias durando 30 segundos e acontece a cada 60 segundos
+de funcionamento normal.
+-Criados dois gráficos com janela 20 e 10, tempo de análise 420 segundos.
+-Considera-se pronto o script para rodar o analisador e o inseridor de anomalias
+em qualquer tempo desejado.
+
+Novo: 
+-adicionada linha no analisador para mostrar o tempo atual.
+
+Próximo:
+-ver se será necessário adicionar sockets e criar a comunicação entre
+nós-filhos com o nó pai e ver quais e como este último irá captar
+os dados e calcular a entropia geral
+
+* 17/072012 MANHÃ * 
+
+-Editado o código para esclarecer algumas coisas e foram inseridos comentários.
+-Arquivo cpuinfo.cpp renomeado para localmetrics.cpp para fins de relação entre
+o código e o conteúdo do artigo (fácil entendimento).
+-Arquivo toPlot.dat editado para plotar a partir de log.txt
+
+Novo: retiradas as variáveis linha e i do código principal. i pois não é utilizado laços
+e linha pois agora é passado o define de CPU e MEM. 
+-Arquivo cpuinfo.cpp renomeado
+
+Próximo:
+-Usar arquivos de P.A para copiar duas coisas: argumentos na chamada e conexão e troca
+de dados entre aplicativos.
+-Esta conexão entre aplicativos pode ser útil na hora de trocar informação entre 
+nós-filhos e um nó-pai, que pode vir a ser utilizado nos testes.
+
+* 16/07/2012 *
+-Adicionei o calculo de entropia sendo executado por um tempo definido (#define analysis_time) em minutos. 
+-Há um novo arquivo para adicionar os dados de entropia, o log.txt, que está dividido por coluna de entropia e de tempo em segundos.
+
+NOVO:
+-Biblioteca ctime.h
+-Variáveis beginTime e endTime para medir o tempo de execução do cálculo de entropia.
+-Retirado o laço i, agora desnecessário.
+-Retiradas algumas linhas que estavam em comentário.
+
+Próximo:
+-Continuar a ver a questão dos nós filho e nó-pai.
+-Limpar os códigos, esclarecer.
+-Função gprintf dentro do código.
+
+
+* 13/07/2012 *
+-Pequenas modificações no cpuinfo.cpp e retirei comentários, nada que altere.
+-O arquivo "text.txt" agora é lido e escrito no mesmo programa, havendo um
+flush que escreve do buffer para o arquivo os dados que foram solicitados.
+
+Próximo:
+-Fazer com que o programa (cpuinfo.cpp) execute durante certo tempo e 
+não durante laços do while.
+-Ver a questão de nodes pai e nodes filhos no programa. Vá pensando em 
+como fazer.
+
+
+
+
+
+* 11/07/2012 *
+-A biblioteca libgtop tem como informar a quantidade de cpus, estou
+utilizando um campo dela para saber isto.
+-Coloquei a métrica de CPU com sendo a média de uso das múltiplas CPUs.
+Fazer a entropia para cada cpu não é tão legal pois não tem a 2ª métrica,
+a memória RAM para cada um deles, iria ficar desigual e mais complexo
+para pegar as métricas dos nós filhos (CPUs), calcular entropia do conjunto
+deles e calcular no nó-pai, a entropia da RAM. Meio confuso. A média
+está sendo calculada corretamente.
+-Estou plotando os gráficos para saber visualmente como está a entropia.
+
+
+Novo:
+-Criei o vetor cpu_buf para guardar as duas leituras independentes.
+-Criei uma variável sys_ref que é uma struct glibtop que tem várias 
+informações importantes, como a quantidade cpus, ao qual preciso-a
+para saber quantos valores irei ler para cpu_buf.
+-Só está escrevendo no arquivo os valores de entropia e tempo.
+-Variável j foi criada para o for que ler os valores das cpus para cpu_buf.
+
+Próximo:
+-Entender pelo artigo, ou por outra forma, como saber se um valor alto, pico
+ou etç é algum alarme. Você montou a ferramenta, falta saber como lê ela e 
+utilizá-la.
+-Melhorar a forma de criação dos gráficos. Editar o arquivo toPlot.dat.
+Ele é como um script.
+-Pesquisar sobre mais opções do comando plot para deixar o gráfico bom de ler.
+
+
+_______________________________________________
+* 10/07/2012 *
+-Com a multiplicação por 100 ao invés de 10 na hora de obter percentagem, as métricas 
+extraídas estão bem próximas das reais observadas no top e no Monitor de sistema do Ubuntu.
+-As métricas terão de ser tiradas sobre as várias CPU dependendo do servidor, através dos campos
+'xcpu_' da estrutura de dados do libgtop. Os cálculos com as métricas sobre uma delas está bom.
+-A forma antiga extrair métricas de cpu através de 'cpu.total' não são mais funcionais com isso.
+Novo: 
+-adicionei um #define para sleep_time. Vai evitar trocar a variável em vários locais dos testes.
+-métricas através de 'xcpu_'
+-percentagem correta com a troca de 10 por 100.
+
+Pŕoximo:
+-fazer mais testes com o Monitor do Ubuntu e com o top e observar os resultados e ver como eles
+calculam a CPU.
+-avançar com a extração do valor de entropia e ver se é isso mesmo.
+-pensar sobre criar nós filhos para métricas locais das cpus do computador e um nó pai para calcular a entropia 
+global. O artigo permite isso. Vá pensando.
